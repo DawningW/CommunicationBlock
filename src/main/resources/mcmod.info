@@ -1,0 +1,16 @@
+[
+{
+  "modid": "serialport",
+  "name": "Communication Block Mod",
+  "description": "Add a new command block which can communicate with devices using serial ports.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["QingChenW"],
+  "credits": "NRJavaSerial",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

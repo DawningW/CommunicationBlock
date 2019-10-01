@@ -1,0 +1,6 @@
+tile.communicationBlock.name=通信方块
+commMod.notEnabled=通信方块没有在此服务器上启用
+commMod.notAllowed=必须是处于创造模式的管理员
+commMod.command=发送数据
+commMod.setCommand=设置此方块要发送的数据
+commMod.setCommand.success=成功设置：%s
