@@ -1,0 +1,35 @@
+modLoader = "javafml"
+loaderVersion = "[47,)"
+issueTrackerURL = "https://github.com/DawningW/CommunicationBlock/issues"
+license = "MIT"
+
+[[mods]]
+modId = "commblock"
+version = "${version}"
+displayName = "CommunicationBlock"
+authors = "QingChenW"
+description = '''
+Add a new command block which can communicate with real world devices using serial/(web)socket/bt/ble/SparkLink
+'''
+#logoFile = ""
+
+[[dependencies.commblock]]
+modId = "forge"
+mandatory = true
+versionRange = "[47,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.commblock]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.commblock]]
+modId = "architectury"
+mandatory = true
+versionRange = "[9.2.14,)"
+ordering = "AFTER"
+side = "BOTH"

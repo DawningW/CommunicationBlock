@@ -1,53 +1,67 @@
-buildscript {
+plugins {
+    id 'dev.architectury.loom' version '1.7-SNAPSHOT' apply false
+    id 'architectury-plugin' version '3.4-SNAPSHOT'
+    id 'com.github.johnrengelman.shadow' version '8.1.1' apply false
+}
+
+architectury {
+    minecraft = project.minecraft_version
+}
+
+allprojects {
+    group = rootProject.maven_group
+    version = rootProject.mod_version
+}
+
+subprojects {
+    apply plugin: 'dev.architectury.loom'
+    apply plugin: 'architectury-plugin'
+    apply plugin: 'maven-publish'
+
+    base {
+        archivesName = "$rootProject.archives_name-$project.name"
+    }
+
     repositories {
-        jcenter()
-        maven { url = "https://files.minecraftforge.net/maven" }
+        maven {
+            name = 'ParchmentMC'
+            url = 'https://maven.parchmentmc.org'
+        }
     }
+
+    loom {
+        silentMojangMappingsLicense()
+    }
+
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+        minecraft "net.minecraft:minecraft:$rootProject.minecraft_version"
+        mappings loom.layered() {
+            officialMojangMappings()
+            parchment("org.parchmentmc.data:parchment-${rootProject.minecraft_version}:${rootProject.parchmentmc_mappings_version}@zip")
+        }
     }
-}
-apply plugin: 'net.minecraftforge.gradle.forge'
-//Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 
-version = "1.0"
-group = "io.github.qingchenw.CommunicationBlock"
-archivesBaseName = "CommunicationBlock"
+    java {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
 
-sourceCompatibility = targetCompatibility = '1.8'
-compileJava {
-    sourceCompatibility = targetCompatibility = '1.8'
-}
-
-minecraft {
-    version = "1.12.2-14.23.5.2847"
-    runDir = "run"
-    mappings = "stable_39"
-}
-
-dependencies {
-    compile "com.neuronrobotics:nrjavaserial:3.15.0"
-}
-
-processResources {
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
-
-    from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
-                
-        expand 'version':project.version, 'mcversion':project.minecraft.version
+        withSourcesJar()
     }
-        
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
-    }
-}
 
-jar {
-    configurations.compile.each { dep ->
-        from(project.zipTree(dep)) {
-            exclude 'META-INF', 'META-INF/**'
+    tasks.withType(JavaCompile).configureEach {
+        it.options.release = 17
+    }
+
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                artifactId = base.archivesName.get()
+                from components.java
+            }
+        }
+
+        repositories {
+
         }
     }
 }

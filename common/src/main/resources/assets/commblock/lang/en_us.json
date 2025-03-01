@@ -1,0 +1,15 @@
+{
+    "block.commblock.communication_block": "Communication Block",
+    "communication.device.unknown": "Unknown device %s",
+    "communication.device.disconnected": "Device %s is disconnected",
+    "communication.send.success": "Sent %d byte(s) of data to %s successfully",
+    "communication.send.failure": "Failed to send data to %s",
+    "communication.setData": "Set data to be sent by this block",
+    "communication.setData.success": "Set data successfully",
+    "communication.device": "Device",
+    "communication.data": "Data",
+    "communication.log": "Log",
+    "category.commblock.default": "Communication Block",
+    "key.commblock.device_manager_key": "Open Device Manager",
+    "multiplayer.deviceManager.not_available": "Device Manager is not available in multiplayer mode."
+}

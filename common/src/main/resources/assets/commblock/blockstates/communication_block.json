@@ -1,0 +1,5 @@
+{
+    "variants": {
+        "": { "model": "commblock:block/communication_block" }
+    }
+}

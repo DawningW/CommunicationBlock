@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "quilt_loader": {
+    "group": "${group}",
+    "id": "commblock",
+    "version": "${version}",
+    "metadata": {
+      "name": "CommunicationBlock",
+      "description": "Add a new command block which can communicate with real world devices using serial/(web)socket/bt/ble/SparkLink",
+      "contributors": {
+        "QingChenW": "Author"
+      },
+      "icon": "assets/commblock/icon.png"
+    },
+    "intermediate_mappings": "net.fabricmc:intermediary",
+    "entrypoints": {
+      "init": [
+        "io.github.qingchenw.commblock.quilt.CommBlockModQuilt"
+      ],
+      "client_init": [
+        "io.github.qingchenw.commblock.quilt.CommBlockModQuilt"
+      ]
+    },
+    "depends": [
+      {
+        "id": "quilt_loader",
+        "version": "*"
+      },
+      {
+        "id": "quilt_base",
+        "version": "*"
+      },
+      {
+        "id": "minecraft",
+        "version": ">=1.20.1"
+      },
+      {
+        "id": "architectury",
+        "version": ">=9.2.14"
+      }
+    ]
+  },
+  "mixin": [
+    "commblock.mixins.json"
+  ]
+}

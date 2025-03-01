@@ -1,0 +1,6 @@
+{
+    "parent": "minecraft:block/cube_all",
+    "textures": {
+        "all": "commblock:block/communication_block"
+    }
+}

@@ -1,0 +1,15 @@
+{
+    "block.commblock.communication_block": "通信方块",
+    "communication.device.unknown": "未知设备 %s",
+    "communication.device.disconnected": "设备 %s 已断开连接",
+    "communication.send.success": "成功向 %2$s 发送 %1$d 字节数据",
+    "communication.send.failure": "向 %s 发送数据失败",
+    "communication.setData": "设置此方块要发送的数据",
+    "communication.setData.success": "成功设置数据",
+    "communication.device": "设备",
+    "communication.data": "数据",
+    "communication.log": "日志",
+    "category.commblock.default": "通信方块",
+    "key.commblock.device_manager_key": "打开设备管理器",
+    "multiplayer.deviceManager.not_available": "设备管理器在非本地游戏中不可用"
+}
