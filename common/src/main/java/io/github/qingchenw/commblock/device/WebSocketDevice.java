@@ -60,8 +60,11 @@ public class WebSocketDevice extends Device {
     }
 
     @Override
-    public void connect() {
-        client.connect();
+    public boolean connect() {
+        try {
+            return client.connectBlocking();
+        } catch (Exception ignored) {}
+        return false;
     }
 
     @Override
@@ -84,7 +87,7 @@ public class WebSocketDevice extends Device {
     public JsonObject toJson() {
         JsonObject json = new JsonObject();
         json.addProperty("url", getName());
-        return new JsonObject();
+        return json;
     }
 
     @Override

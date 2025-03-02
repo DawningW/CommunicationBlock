@@ -51,14 +51,12 @@ public class CommunicationBlockEditScreen extends Screen {
         this.logEdit.setEditable(false);
         this.addWidget(this.logEdit);
         this.setInitialFocus(this.dataEdit);
-        this.doneButton = this.addRenderableWidget(
-                Button.builder(CommonComponents.GUI_DONE, arg -> this.onDone())
-                        .bounds(this.width / 2 - 4 - 150, this.height / 4 + 120 + 12, 150, 20).build()
-        );
-        this.cancelButton = this.addRenderableWidget(
-                Button.builder(CommonComponents.GUI_CANCEL, arg -> this.onClose())
-                        .bounds(this.width / 2 + 4, this.height / 4 + 120 + 12, 150, 20).build()
-        );
+        this.doneButton = Button.builder(CommonComponents.GUI_DONE, arg -> this.onDone())
+                .bounds(this.width / 2 - 4 - 150, this.height / 4 + 120 + 12, 150, 20).build();
+        this.addRenderableWidget(this.doneButton);
+        this.cancelButton = Button.builder(CommonComponents.GUI_CANCEL, arg -> this.onClose())
+                .bounds(this.width / 2 + 4, this.height / 4 + 120 + 12, 150, 20).build();
+        this.addRenderableWidget(this.cancelButton);
     }
 
     @Override

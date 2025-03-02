@@ -19,8 +19,8 @@ public class SocketDevice extends Device {
     }
 
     @Override
-    public void connect() {
-
+    public boolean connect() {
+        return false;
     }
 
     @Override

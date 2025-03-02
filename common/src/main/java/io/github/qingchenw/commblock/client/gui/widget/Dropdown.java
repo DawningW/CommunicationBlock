@@ -30,7 +30,7 @@ public class Dropdown<T> extends AbstractWidget {
     @Override
     public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         Font font = Minecraft.getInstance().font;
-        int backgroundColor = this.isHovered() ? 0xFF808080 : 0xFF404040;
+        int backgroundColor = this.isFocused() ? 0xFFFFFFFF : 0xFFA0A0A0;
 
         guiGraphics.fill(this.getX(), this.getY(), this.getX() + this.width, this.getY() + this.height,
                 backgroundColor);

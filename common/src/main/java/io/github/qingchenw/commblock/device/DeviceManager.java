@@ -26,22 +26,28 @@ public final class DeviceManager implements Device.DeviceEventListener {
 
     private DeviceManager() {}
 
-    public void addDevice(Device device) {
+    public boolean addDevice(Device device) {
+        if (device == null || devices.containsKey(device.getName())) {
+            return false;
+        }
         devices.put(device.getName(), device);
         device.addListener(this);
         listeners.forEach(listener -> listener.onDeviceAdded(device));
         CommBlockMod.saveConfig(saveToJson());
+        return true;
     }
 
-    public void removeDevice(String name) {
+    public boolean removeDevice(String name) {
         Device device = devices.get(name);
-        if (device != null) {
-            device.removeListener(this);
-            device.disconnect();
-            listeners.forEach(listener -> listener.onDeviceRemoved(device));
+        if (device == null) {
+            return false;
         }
+        device.removeListener(this);
+        device.disconnect();
+        listeners.forEach(listener -> listener.onDeviceRemoved(device));
         devices.remove(name);
         CommBlockMod.saveConfig(saveToJson());
+        return true;
     }
 
     public Optional<Device> getDevice(String name) {
@@ -54,6 +60,7 @@ public final class DeviceManager implements Device.DeviceEventListener {
 
     public void startDiscovery() {
         Arrays.stream(SerialDevice.getAvailablePorts())
+                .filter(port -> !devices.containsKey(port))
                 .forEach(port -> listeners.forEach(
                         listener -> listener.onDeviceDiscovered(SerialDevice.TYPE, port)));
     }

@@ -67,7 +67,7 @@ public class SerialDevice extends Device {
     }
 
     @Override
-    public void connect() {
+    public boolean connect() {
         serialPort.addDataListener(new SerialPortMessageListener() {
             @Override
             public byte[] getMessageDelimiter() {
@@ -94,8 +94,11 @@ public class SerialDevice extends Device {
                 }
             }
         });
-        serialPort.openPort();
-        listeners.forEach(DeviceEventListener::onConnected);
+        boolean result = serialPort.openPort();
+        if (result) {
+            listeners.forEach(DeviceEventListener::onConnected);
+        }
+        return result;
     }
 
     @Override

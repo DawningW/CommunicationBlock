@@ -29,7 +29,7 @@ public class DeviceCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         DeviceManager.get().addListener(listener);
         dispatcher.register(Commands.literal("device")
-                .requires(source -> source.hasPermission(3))
+                .requires(source -> source.hasPermission(2))
                 .then(Commands.literal("list")
                         .executes(ctx -> showList(ctx.getSource()))
                 )
@@ -149,7 +149,9 @@ public class DeviceCommand {
             if (device == null) {
                 throw new CommandRuntimeException(Component.literal("设备添加失败"));
             }
-            DeviceManager.get().addDevice(device);
+            if (!DeviceManager.get().addDevice(device)) {
+                throw new CommandRuntimeException(Component.literal("设备已存在"));
+            }
             source.sendSuccess(() -> Component.literal("设备添加成功"), true);
         } catch (Exception e) {
             throw new CommandRuntimeException(Component.literal(e.getMessage()));
@@ -163,7 +165,9 @@ public class DeviceCommand {
             throw new CommandRuntimeException(Component.literal("设备不存在"));
         }
         device.get().disconnect();
-        DeviceManager.get().removeDevice(name);
+        if (!DeviceManager.get().removeDevice(name)) {
+            throw new CommandRuntimeException(Component.literal("设备移除失败"));
+        }
         source.sendSuccess(() -> Component.literal("设备移除成功"), true);
         return Command.SINGLE_SUCCESS;
     }
@@ -176,8 +180,7 @@ public class DeviceCommand {
         if (device.get().isConnected()) {
             throw new CommandRuntimeException(Component.literal("设备已连接"));
         }
-        device.get().connect();
-        if (!device.get().isConnected()) {
+        if (!device.get().connect()) {
             throw new CommandRuntimeException(Component.literal("设备连接失败"));
         }
         source.sendSuccess(() -> Component.literal("设备连接成功"), true);

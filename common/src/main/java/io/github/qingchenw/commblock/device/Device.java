@@ -12,7 +12,7 @@ public abstract class Device {
     abstract public String getType();
     abstract public String getName();
 
-    abstract public void connect();
+    abstract public boolean connect();
     abstract public void disconnect();
     abstract public boolean isConnected();
     abstract public int send(byte[] data);
